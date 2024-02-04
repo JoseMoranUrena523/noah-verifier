@@ -11,6 +11,11 @@ module.exports = {
     const member = interaction.member;
     const role = await db.get(interaction.guildId + "_role");
 
+		if (!role) {
+			await interaction.reply("An administrator hasn't configured a role to set when verified.");
+			return;
+		}
+
     if (member.roles.cache.some(checkRole => checkRole.name === role.name)) {
       await member.roles.remove(role.id)
 		  await interaction.reply('NOAH lightning address has been removed!');
