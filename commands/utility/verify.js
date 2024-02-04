@@ -25,13 +25,13 @@ module.exports = {
 			await interaction.reply("An administrator hasn't configured a role to set when verified.");
 			return;
 		}
-
-		await interaction.reply('Verifying lightning address...');
 		
 		if (member.roles.cache.some(roleCheck => roleCheck.name === role.name)) {
-			await interaction.editReply("You are already verified.")
+			await interaction.reply("You are already verified.")
 			return;
 		}
+
+		await interaction.reply('Verifying lightning address...');
 
 		if (!data.data.valid) {
 			await interaction.editReply("The lightning address is invalid. Please try again.");
