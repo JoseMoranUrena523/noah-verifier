@@ -16,17 +16,17 @@ module.exports = {
 				.setDescription('The NOAH lightning address to verify (without @noah.me).')
 				.setRequired(true)),
 	async execute(interaction) {
-		await interaction.reply('Verifying lightning address...');
-
 		const gamertag = interaction.options.getString('gamertag').replace(/\s+/g, '');
 		const data = await ZBD.validateLightningAddress(gamertag + "@noah.me");
 		const role = await db.get(interaction.guildId + "_role");
 		const member = interaction.member;
 
 		if (!role) {
-			await interaction.editReply("An administrator hasn't configured a role to set when verified.");
+			await interaction.reply("An administrator hasn't configured a role to set when verified.");
 			return;
 		}
+
+		await interaction.reply('Verifying lightning address...');
 		
 		if (member.roles.cache.some(roleCheck => roleCheck.name === role.name)) {
 			await interaction.editReply("You are already verified.")
@@ -39,6 +39,6 @@ module.exports = {
 		}
 
 		await member.roles.add(role.id);
-		await interaction.editReply('Lightning address verified! Role added.');
+		await interaction.editReply('Your lightning address verified! Role has been added.');
 	},
 };
