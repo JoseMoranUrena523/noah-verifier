@@ -15,13 +15,13 @@ Sentry.init({
   profilesSampleRate: 1.0,
 });
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+// const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-const ap = AutoPoster(process.env.topggToken, client);
+// const ap = AutoPoster(process.env.topggToken, client);
 
-ap.on('posted', () => {
-  console.log('Posted stats to Top.gg!')
-})
+// ap.on('posted', () => {
+//   console.log('Posted stats to Top.gg!')
+// })
 
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
